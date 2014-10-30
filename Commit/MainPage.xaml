@@ -1,0 +1,163 @@
+﻿<Page
+    x:Class="Commit.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Commit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{StaticResource AppBackgroundThemeBrush}"
+    mc:Ignorable="d"
+    ManipulationMode="TranslateX" ManipulationStarted="MainContent_ManipulationStarted" ManipulationDelta="MainContent_ManipulationDelta" ManipulationCompleted="Page_ManipulationCompleted">
+
+    <!--<Page.Background>
+        <ImageBrush Stretch="Fill" ImageSource="Assets/Images/bg.png"/>
+    </Page.Background>-->
+
+    <Page.BottomAppBar>
+        <CommandBar Background="Transparent" ClosedDisplayMode="Minimal" Opened="CommandBar_Opened" Closed="CommandBar_Closed">
+            <AppBarButton Icon="Edit" Label="edit"/>
+            <AppBarButton Icon="Setting" Label="settings"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid>
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="SidebarVisualStateGroup">
+    			<VisualStateGroup.Transitions>
+    				<VisualTransition GeneratedDuration="0:0:0.4">
+    					<VisualTransition.GeneratedEasingFunction>
+    						<CubicEase EasingMode="EaseOut"/>
+    					</VisualTransition.GeneratedEasingFunction>
+    				</VisualTransition>
+    			</VisualStateGroup.Transitions>
+    			<VisualState x:Name="MenuOpenedVisualState">
+    				<Storyboard>
+    					<DoubleAnimation Duration="0" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MainContent" d:IsOptimized="True">
+    						<DoubleAnimation.EasingFunction>
+    							<CubicEase EasingMode="EaseOut"/>
+    						</DoubleAnimation.EasingFunction>
+    					</DoubleAnimation>
+    					<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="LeftMenu" d:IsOptimized="True">
+    						<DoubleAnimation.EasingFunction>
+    							<CubicEase EasingMode="EaseOut"/>
+    						</DoubleAnimation.EasingFunction>
+    					</DoubleAnimation>
+    				</Storyboard>
+    			</VisualState>
+    			<VisualState x:Name="MenuClosedVisualState">
+    				<Storyboard>
+    					<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MainContent" d:IsOptimized="True">
+    						<DoubleAnimation.EasingFunction>
+    							<CubicEase EasingMode="EaseOut"/>
+    						</DoubleAnimation.EasingFunction>
+    					</DoubleAnimation>
+    					<DoubleAnimation Duration="0" To="-30" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="LeftMenu" d:IsOptimized="True">
+    						<DoubleAnimation.EasingFunction>
+    							<CubicEase EasingMode="EaseOut"/>
+    						</DoubleAnimation.EasingFunction>
+    					</DoubleAnimation>
+    				</Storyboard>
+    			</VisualState>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
+
+        <Grid x:Name="LeftMenu" Width="350" Background="#33000000" ScrollViewer.VerticalScrollMode="Enabled" HorizontalAlignment="Left">
+        	<Grid Margin="0,32,0,0">
+        		<StackPanel Margin="36,36,36,24" VerticalAlignment="Center">
+        			<TextBlock Text="Item 1" FontSize="42" Margin="0,0,0,24"/>
+        			<TextBlock Text="Item 2" FontSize="42" Margin="0,0,0,24"/>
+        			<TextBlock Text="Item 3" FontSize="42" Margin="0,0,0,24"/>
+        			<TextBlock Text="Item 4" FontSize="42" Margin="0,0,0,24"/>
+        			<TextBlock Text="Item 5" FontSize="42" Margin="0,0,0,24"/>
+        		</StackPanel>
+        	</Grid>
+    	</Grid>
+
+        <Grid x:Name="MainContent" Background="#272b46">
+            <Grid Margin="18,24,18,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="1" Margin="0">
+                    <TextBlock TextWrapping="Wrap" Text="I will" VerticalAlignment="Top" FontSize="42" Foreground="{StaticResource KeepNoteTealBrush}" Padding="0" Opacity="0.9"/>
+                    <TextBox TextWrapping="Wrap" Text="sleep early" VerticalAlignment="Top" FontSize="42" Background="{StaticResource TextBoxBackgroundThemeBrush}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" PlaceholderText="workout" BorderThickness="0" Margin="0,-6,0,0" Padding="0,2.5,0,4"/>
+                    <TextBlock TextWrapping="Wrap" Text="everyday." VerticalAlignment="Top" FontSize="42" Foreground="{StaticResource KeepNoteTealBrush}" Padding="0" Opacity="0.9"/>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="2" Margin="0,24,0,0">
+                    <local:FluidGrid Columns="10" Margin="-3">
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteRedBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteRedBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteRedBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteRedBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="{StaticResource KeepNoteTealBrush}" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                        <GridViewItem Height="20" Background="#19FFFFFF" Margin="3" />
+                    </local:FluidGrid>
+                </ScrollViewer>
+
+
+                <Grid Grid.Row="3" Margin="0,24,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="❌" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Segoe UI Symbol" FontSize="48" MinWidth="0" Width="100" Height="100" Foreground="#19FFFFFF" BorderThickness="0" Background="{x:Null}" PointerEntered="NoButton_PointerEntered" PointerExited="Button_PointerExited"/>
+                    <Button Content="&#xE001;" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Segoe UI Symbol" FontSize="48" Margin="9,0,0,0" Foreground="White" BorderThickness="0" Background="#19FFFFFF" PointerEntered="YesButton_PointerEntered" PointerExited="Button_PointerExited"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
